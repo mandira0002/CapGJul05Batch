@@ -14,7 +14,7 @@ int main()
 	pid = fork();
 	if(pid > 0)
 	{
-		sleep(30);
+		
 		cout<<"This is a parent process"<<endl;
 		cout<<"pid from fork = "<<pid<<endl;
 		cout<<"PID : "<<getpid()<<endl;
@@ -28,7 +28,7 @@ int main()
 		cout<<"pid from fork = "<<pid<<endl;
 		cout<<"PID : "<<getpid()<<endl;
 		cout<<"PPID : "<<getppid()<<endl;
-		exit(0);
+		for(;;);
 	}
 	else
 		cout<<"Fork failed"<<endl;
