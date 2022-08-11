@@ -12,21 +12,26 @@ int main()
 	int pid;
 
 	pid = fork();
-	// if(pid > 0)
-	// {
-	// 	cout<<"This is a parent process"<<endl;
-	// 	cout<<"pid from fork = "<<pid<<endl;
-	// 	cout<<"PID : "<<getpid()<<endl;
-	// 	cout<<"PPID : "<<getppid()<<endl;
-	// }
-
-	if(pid == 0)
+	if(pid > 0)
 	{
-		cout<<"This is a child process"<<endl;
+		sleep(30);
+		cout<<"This is a parent process"<<endl;
 		cout<<"pid from fork = "<<pid<<endl;
 		cout<<"PID : "<<getpid()<<endl;
 		cout<<"PPID : "<<getppid()<<endl;
 	}
+
+	else if(pid == 0)
+	{
+
+		cout<<"This is a child process"<<endl;
+		cout<<"pid from fork = "<<pid<<endl;
+		cout<<"PID : "<<getpid()<<endl;
+		cout<<"PPID : "<<getppid()<<endl;
+		exit(0);
+	}
+	else
+		cout<<"Fork failed"<<endl;
 
 	cout<<"Hello World"<<endl;
 
