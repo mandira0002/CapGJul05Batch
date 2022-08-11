@@ -9,9 +9,17 @@ it will duplicate all the excution steps after it is called
 
 int main()
 {
+
+	// cout<<"PID : "<<getpid()<<endl;
+	// cout<<"PPID : "<<getppid()<<endl;
+
+	fork();
+	fork();
 	cout<<"PID : "<<getpid()<<endl;
 	cout<<"PPID : "<<getppid()<<endl;
+
 	cout<<"Hello world"<<endl;
+
 
 	return 0;
 }
