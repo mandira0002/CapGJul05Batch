@@ -9,7 +9,7 @@ BIN = bin
 OBJ = obj
 SRC = src
 
-all: sysPrg1 p2 p3 p4 p5
+all: sysPrg1 sysPrg2 p3 p4 p5
 
 sysPrg1: $(OBJ)/sysPrg1.o
 	$(CC) $(LDFLAGS) $(BIN)/sysPrg1 $(OBJ)/sysPrg1.o
@@ -18,11 +18,11 @@ $(OBJ)/sysPrg1.o: $(SRC)/sysPrg1.cpp
 	$(CC) $(CCFLAGS) $(IFLAGS)$(INC)/ $(SRC)/sysPrg1.cpp
 	mv *.o $(OBJ)/
 
-p2: $(OBJ)/p2.o
-	$(CC) $(LDFLAGS) $(BIN)/p2 $(OBJ)/p2.o
+sysPrg2: $(OBJ)/sysPrg2.o
+	$(CC) $(LDFLAGS) $(BIN)/sysPrg2 $(OBJ)/sysPrg2.o
 
-$(OBJ)/p2.o: $(SRC)/p2.cpp
-	$(CC) $(CCFLAGS) $(IFLAGS)$(INC)/ $(SRC)/p2.cpp
+$(OBJ)/sysPrg2.o: $(SRC)/sysPrg2.cpp
+	$(CC) $(CCFLAGS) $(IFLAGS)$(INC)/ $(SRC)/sysPrg2.cpp
 	mv *.o $(OBJ)/
 
 p3: $(OBJ)/p3.o
@@ -49,6 +49,6 @@ $(OBJ)/p5.o: $(SRC)/p5.cpp
 clean:
 	rm -f a.out *.o
 	rm $(OBJ)/*.o
-	rm $(BIN)/sysPrg1 $(BIN)/p2 $(BIN)/p3 $(BIN)/p4
+	rm $(BIN)/sysPrg1 $(BIN)/sysPrg2 $(BIN)/p3 $(BIN)/p4
 	rm $(BIN)/p5
 	@echo "Cleaning Done!"
