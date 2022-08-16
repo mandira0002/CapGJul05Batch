@@ -1,8 +1,9 @@
 #include <myHeader.h>
 
-int main()
+int main(int argc, char *argv[])
 {
-	cout<<"Hello World"<<endl;
-
+	for(int i=1;i<argc;i++)
+		cout<<"Argv["<<i<<"] : "<<argv[i]<<endl;
+	cout<<"\n\nHello Program"<<endl;
 	return (EXIT_SUCCESS);
 }
