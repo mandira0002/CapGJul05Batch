@@ -1,0 +1,12 @@
+				1fork()
+				2fork()
+				cout
+		parent					child
+		2fork()					2fork()
+		cout					cout
+parent			child		parent 		child
+cout			cout		cout		cout
+
+
+
+	
