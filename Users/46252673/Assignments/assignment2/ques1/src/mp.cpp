@@ -42,7 +42,13 @@ void MultiProcess::createProcess(string buffer)
 	{
 		//To make the parent wait until the termination of the child
 		int id=waitpid(pid,&exitstatus,0);
-		process_display_exit_code(id,exitstatus);
+		//if error occurs waitpid returns -1
+		if(id==-1)
+		{
+			perror("waitpid");
+			exit(EXIT_FAILURE);
+		}
+		process_display_exit_code(exitstatus);
 		cout<<"Parent Process:"<<endl;
 		//To get the parent pid
 		cout<<"PID:"<<getpid()<<endl;
@@ -62,14 +68,8 @@ void MultiProcess::createProcess(string buffer)
 	}
 
 }
-void MultiProcess::process_display_exit_code(int id,int exitstatus)
+void MultiProcess::process_display_exit_code(int exitstatus)
 {
-	//On error waitpid returns -1 
-	if (id == -1) 
-	{ 
-		perror("waitpid"); 
-		exit(EXIT_FAILURE); 
-	}
 	//Execute if the process existed normally
 	if (WIFEXITED(exitstatus)) {
 		cout<<"Exit status="<< WEXITSTATUS(exitstatus)<<endl;

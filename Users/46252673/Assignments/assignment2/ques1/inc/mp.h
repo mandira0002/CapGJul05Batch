@@ -18,7 +18,7 @@ class MultiProcess
 		MultiProcess();
 		//Functions declaration
 		void createProcess(string);
-		void process_display_exit_code(int,int);
+		void process_display_exit_code(int);
 		//destructor
 		~MultiProcess();
 	private:
