@@ -15,4 +15,8 @@ int main()
 	for(;;);
 
 	return 0;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5ea79f9c7156873bc0cd004ba3bcbc31787a3c8b
