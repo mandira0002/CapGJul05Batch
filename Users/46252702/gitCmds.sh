@@ -1,4 +1,4 @@
-igit status
+git status
 sleep 1
 git add .
 sleep 1
