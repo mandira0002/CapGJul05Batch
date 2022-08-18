@@ -48,6 +48,7 @@ void MultiProcess::createProcess(string buffer)
 			perror("waitpid");
 			exit(EXIT_FAILURE);
 		}
+		sleep(2);
 		process_display_exit_code(exitstatus);
 		cout<<"Parent Process:"<<endl;
 		//To get the parent pid
