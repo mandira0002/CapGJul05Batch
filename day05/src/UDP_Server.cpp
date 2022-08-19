@@ -40,7 +40,18 @@ int main()
 
 	cout<<"\nServer is now open for clients to send/recv msgs"<<endl;
 
+	strcpy(server_msg,"Welcome to Server");
 
+	int retRF = sendto(sockfd, server_msg, sizeof(server_msg), 0,
+		(struct sockaddr*)&client_addr, client_addr_len);
+
+	if(retRF < 0)
+	{
+		perror("sendto() error");
+		exit(EXIT_FAILURE);
+	}
+
+	close(sockfd);
 
 	return 0;
 }

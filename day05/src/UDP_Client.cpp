@@ -8,7 +8,7 @@ int main()
 	char server_msg[SIZE];
 	char client_msg[SIZE];
 
-	int client_addr_len = sizeof(client_addr);
+	int server_addr_len = sizeof(server_addr);
 
 	memset(server_msg,'\0',sizeof(server_msg));
 	memset(client_msg,'\0',sizeof(client_msg));
@@ -36,7 +36,18 @@ int main()
 
 	cout<<"Client done with the bind"<<endl;
 
-	
+	int retRF = recvfrom(sockfd, server_msg, sizeof(server_msg), 0,
+		     (struct sockaddr*)&server_addr, (socklen_t*)&server_addr_len);
+
+	if(retRF < 0)
+	{
+		perror("recvfrom() error");
+		exit(EXIT_FAILURE);
+	}
+
+	cout<<"\n\nReceived from Server:\n\n\t"<<client_msg<<endl;
+
+	close(sockfd);
 
 	return 0;
 }
