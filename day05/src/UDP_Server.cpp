@@ -29,7 +29,7 @@ int main()
 	server_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
 
 
-	int rbind = bind(sockfd,(struct sockaddr *)&server_addr, sizeof(server_addr))
+	int rbind = bind(sockfd,(struct sockaddr *)&server_addr, sizeof(server_addr));
 	if(rbind < 0)
 	{
 		perror("bind() error");
@@ -40,7 +40,7 @@ int main()
 
 	cout<<"\nServer is now open for clients to send/recv msgs"<<endl;
 
-	
+
 
 	return 0;
 }
