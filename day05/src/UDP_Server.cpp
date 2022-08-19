@@ -40,16 +40,26 @@ int main()
 
 	cout<<"\nServer is now open for clients to send/recv msgs"<<endl;
 
-	strcpy(server_msg,"Welcome to Server");
-
-	int retRF = sendto(sockfd, server_msg, sizeof(server_msg), 0,
-		(struct sockaddr*)&client_addr, client_addr_len);
-
-	if(retRF < 0)
+	if(recvfrom(sockfd, client_msg, sizeof(client_msg), 0,
+		(struct sockaddr*)&client_addr, (socklen_t*)&client_addr_len)<0)
 	{
-		perror("sendto() error");
-		exit(EXIT_FAILURE);
+		perror("recvfrom() error");
+		exit(EXIT_FAILURE);	
 	}
+
+
+	cout<<"Message from the client:\t"<<client_msg<<endl;
+	// strcpy(server_msg,"Welcome to Server");
+
+	
+	// int retRF = sendto(sockfd, server_msg, sizeof(server_msg), 0,
+	// 	(struct sockaddr*)&client_addr, client_addr_len);
+
+	// if(retRF < 0)
+	// {
+	// 	perror("sendto() error");
+	// 	exit(EXIT_FAILURE);
+	// }
 
 	close(sockfd);
 

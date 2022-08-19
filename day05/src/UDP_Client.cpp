@@ -27,25 +27,34 @@ int main()
 	server_addr.sin_port = htons(PORTNO);
 	server_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
 
-	int rbind = bind(sockfd,(struct sockaddr *)&server_addr, sizeof(server_addr));
-	if(rbind < 0)
-	{
-		perror("bind() error");
-		exit(EXIT_FAILURE);	
-	}
+	// int rbind = bind(sockfd,(struct sockaddr *)&server_addr, sizeof(server_addr));
+	// if(rbind < 0)
+	// {
+	// 	perror("bind() error");
+	// 	exit(EXIT_FAILURE);	
+	// }
 
 	cout<<"Client done with the bind"<<endl;
 
-	int retRF = recvfrom(sockfd, server_msg, sizeof(server_msg), 0,
-		     (struct sockaddr*)&server_addr, (socklen_t*)&server_addr_len);
-
-	if(retRF < 0)
+	strcpy(client_msg,"I am Client\nWants to send and recv messages\n");
+	if(sendto(sockfd, client_msg, strlen(client_msg), 0,
+		(struct sockaddr*)&server_addr, server_addr_len)<0)
 	{
-		perror("recvfrom() error");
+		perror("sendto() error");
 		exit(EXIT_FAILURE);
 	}
 
-	cout<<"\n\nReceived from Server:\n\n\t"<<client_msg<<endl;
+	cout<<"Sent \""<<client_msg<<"\" to the server"<<endl;
+	// int retRF = recvfrom(sockfd, server_msg, sizeof(server_msg), 0,
+	// 	     (struct sockaddr*)&server_addr, (socklen_t*)&server_addr_len);
+
+	// if(retRF < 0)
+	// {
+	// 	perror("recvfrom() error");
+	// 	exit(EXIT_FAILURE);
+	// }
+
+	// cout<<"\n\nReceived from Server:\n\n\t"<<client_msg<<endl;
 
 	close(sockfd);
 
