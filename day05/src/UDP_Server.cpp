@@ -40,7 +40,7 @@ int main()
 	cout<<"Server done with the bind"<<endl;
 
 	cout<<"\nServer is now open for clients to send/recv msgs"<<endl;
-	//while(1){
+	while(1){
 		memset(client_msg,'\0',sizeof(client_msg));
 		if(recvfrom(sockfd, client_msg, sizeof(client_msg), 0,
 			(struct sockaddr*)&client_addr, (socklen_t*)&client_addr_len)<0)
@@ -58,7 +58,7 @@ int main()
 		strcat(server_msg,client_msg);
 		sleep(1);
 		if(sendto(sockfd, server_msg, strlen(server_msg), 0,
-			(struct sockaddr*)&server_addr, server_addr_len)<0)
+			(struct sockaddr*)&client_addr, client_addr_len)<0)
 		{
 			perror("sendto() error");
 			exit(EXIT_FAILURE);	
@@ -69,10 +69,10 @@ int main()
 		cout<<"Sent Message to the client:\n"<<endl;
 		if(strcmp(client_msg,":bye")==0){
 			cout<<"Bye"<<endl;
-			//break;
+			break;
 		}
 
-	//}
+	}
 	// strcpy(server_msg,"Welcome to Server");
 
 	

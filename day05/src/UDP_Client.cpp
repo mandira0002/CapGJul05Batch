@@ -36,8 +36,9 @@ int main()
 	// }
 
 	cout<<"Client done with the bind"<<endl;
-
-	strcpy(client_msg,"I am Client\nWants to send and recv messages\n");
+	string cmsg;
+	getline(cin,cmsg);
+	strcpy(client_msg,(const char*)cmsg.c_str());
 	if(sendto(sockfd, client_msg, strlen(client_msg), 0,
 		(struct sockaddr*)&server_addr, server_addr_len)<0)
 	{
