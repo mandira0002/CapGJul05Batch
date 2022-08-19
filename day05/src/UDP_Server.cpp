@@ -10,6 +10,7 @@ int main()
 	char client_msg[SIZE];
 
 	int client_addr_len = sizeof(client_addr);
+	int server_addr_len = sizeof(server_addr);
 
 	memset(server_msg,'\0',sizeof(server_msg));
 	memset(client_msg,'\0',sizeof(client_msg));
@@ -39,16 +40,39 @@ int main()
 	cout<<"Server done with the bind"<<endl;
 
 	cout<<"\nServer is now open for clients to send/recv msgs"<<endl;
+	//while(1){
+		memset(client_msg,'\0',sizeof(client_msg));
+		if(recvfrom(sockfd, client_msg, sizeof(client_msg), 0,
+			(struct sockaddr*)&client_addr, (socklen_t*)&client_addr_len)<0)
+		{
+			perror("recvfrom() error");
+			exit(EXIT_FAILURE);	
+		}
+	
 
-	if(recvfrom(sockfd, client_msg, sizeof(client_msg), 0,
-		(struct sockaddr*)&client_addr, (socklen_t*)&client_addr_len)<0)
-	{
-		perror("recvfrom() error");
-		exit(EXIT_FAILURE);	
-	}
+
+		cout<<"Message from the client:\n"<<client_msg<<endl;
+		
+		memset(server_msg,'\0',sizeof(server_msg));
+		strcpy(server_msg,"From Server: ");
+		strcat(server_msg,client_msg);
+		sleep(1);
+		if(sendto(sockfd, server_msg, strlen(server_msg), 0,
+			(struct sockaddr*)&server_addr, server_addr_len)<0)
+		{
+			perror("sendto() error");
+			exit(EXIT_FAILURE);	
+		}
+	
 
 
-	cout<<"Message from the client:\t"<<client_msg<<endl;
+		cout<<"Sent Message to the client:\n"<<endl;
+		if(strcmp(client_msg,":bye")==0){
+			cout<<"Bye"<<endl;
+			//break;
+		}
+
+	//}
 	// strcpy(server_msg,"Welcome to Server");
 
 	

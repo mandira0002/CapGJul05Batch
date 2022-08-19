@@ -9,7 +9,6 @@ int main()
 	char client_msg[SIZE];
 
 	int server_addr_len = sizeof(server_addr);
-	int client_addr_len = sizeof(client_addr);
 
 	memset(server_msg,'\0',sizeof(server_msg));
 	memset(client_msg,'\0',sizeof(client_msg));
@@ -37,7 +36,7 @@ int main()
 
 	cout<<"Client done with the bind"<<endl;
 
-	strcpy(client_msg,"I am Client\nWants to send and recv messages\n");
+	strcpy(client_msg,":bye");
 	if(sendto(sockfd, client_msg, strlen(client_msg), 0,
 		(struct sockaddr*)&server_addr, server_addr_len)<0)
 	{
@@ -45,19 +44,7 @@ int main()
 		exit(EXIT_FAILURE);
 	}
 
-	cout<<"Sent \""<<client_msg<<"\" to the server\n"<<endl;
-
-	sleep(1);
-	if(recvfrom(sockfd, server_msg, sizeof(server_msg), 0,
-		(struct sockaddr*)&client_addr, (socklen_t*)&client_addr_len)<0)
-	{
-		perror("sendto() error");
-		exit(EXIT_FAILURE);
-	}
-
-	cout<<"Received from Server:"<<server_msg<<endl;
-
-
+	cout<<"Sent \""<<client_msg<<"\" to the server"<<endl;
 	// int retRF = recvfrom(sockfd, server_msg, sizeof(server_msg), 0,
 	// 	     (struct sockaddr*)&server_addr, (socklen_t*)&server_addr_len);
 
