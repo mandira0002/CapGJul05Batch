@@ -1,5 +1,9 @@
 #include <file.h>
-void process_display_exit_code(int);
+void display_exit(int status)
+{
+	int exit_status = WEXITSTATUS(status);
+	cout<<"\n \n Child exit with status: "<<exit_status;
+}	
 int main(int argc,char* argv[])
 {
 	char *filename = argv[1];
@@ -18,7 +22,7 @@ int main(int argc,char* argv[])
 			waitpid(pid,&status,0);
 			if(WIFEXITED(status))
 			{
-				process_display_exit_code(status);
+				display_exit(status);
 				cout<<"\n Reading from file [Parent Process]...\n";
 				file.open(filename, ios::in);
 				if(!file)
@@ -35,20 +39,19 @@ int main(int argc,char* argv[])
 			}
 			if(WIFSIGNALED(status))
 			{
-				process_display_exit_code(status);
+				display_exit(status);
 				cout<<"\n Child exited with signal: "<<WTERMSIG(status)<<endl;
 			}
 		}		
 	else if(pid == 0)
-		{
+	{
 			cout<<"\nChild Created!\n";
-			cout<<"Child's Process Id: "<<getpid()<<endl;
-			cout<<"Parent's Process Id: "<<getppid()<<endl;
+			cout<<"Child Process Id: "<<getpid()<<endl;
+			cout<<"Parent Process Id: "<<getppid()<<endl;
 			file.open(filename,ios::trunc | ios::out);
 			if(file.is_open())
 			{
-				cout<<"\nWriting to file [Child Process]...\n";
-				cout<<"(Enter \"-1\" to exit)"<<endl;
+				cout<<"(Enter -1 to exit)"<<endl;
 				while(file)
 				{	
 				getline(cin,line);
@@ -73,11 +76,3 @@ int main(int argc,char* argv[])
 	}
 	return 0;
 }
-
-//function definition
-void process_display_exit_code(int status)
-{
-	int exit_status = WEXITSTATUS(status);
-	cout<<"\nChild exited with status: "<<exit_status;
-}
-
