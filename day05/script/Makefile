@@ -12,18 +12,18 @@ INC = inc
 
 all: Server	Client
 
-Server: $(OBJ)/Server.o
-	$(CC) $(LDFLAGS) $(BIN)/Server $(OBJ)/Server.o
+Server: $(OBJ)/UDP_Server.o
+	$(CC) $(LDFLAGS) $(BIN)/Server $(OBJ)/UDP_Server.o
 
-$(OBJ)/Server.o: $(SRC)/Server.cpp
-	$(CC) $(CCFLAGS) $(SRC)/Server.cpp $(IFLAGS) $(INC)
+$(OBJ)/UDP_Server.o: $(SRC)/UDP_Server.cpp
+	$(CC) $(CCFLAGS) $(SRC)/UDP_Server.cpp $(IFLAGS) $(INC)
 	mv *.o $(OBJ)/
 
-Client: $(OBJ)/Client.o
-	$(CC) $(LDFLAGS) $(BIN)/Client $(OBJ)/Client.o
+Client: $(OBJ)/UDP_Client.o
+	$(CC) $(LDFLAGS) $(BIN)/Client $(OBJ)/UDP_Client.o
 
-$(OBJ)/Client.o: $(SRC)/Client.cpp
-	$(CC) $(CCFLAGS) $(SRC)/Client.cpp $(IFLAGS) $(INC)
+$(OBJ)/UDP_Client.o: $(SRC)/UDP_Client.cpp
+	$(CC) $(CCFLAGS) $(SRC)/UDP_Client.cpp $(IFLAGS) $(INC)
 	mv *.o $(OBJ)/
 
 clean:
@@ -31,4 +31,4 @@ clean:
 	rm $(OBJ)/*.o
 	rm $(BIN)/Server $(BIN)/Client
 	@echo "Cleaning Done"
-	
+
