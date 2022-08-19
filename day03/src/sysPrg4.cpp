@@ -29,8 +29,13 @@ int main()
 {
 	// char *str;
 	// char str2[]="Bhima";
+	// str = new char[strlen(str2)+1];
 	// strcpy(str,str2);
-	int status=0;
+	// cout<<str<<endl;
+	int *p;
+	*p = 10;
+	cout<<*p<<endl;
+	/*int status=0;
 	signal(SIGINT, abc);
 	signal(SIGQUIT, abc);
 	signal(SIGSEGV, abc);
@@ -45,7 +50,7 @@ int main()
 		cout<<"Parent died: status :"<<status/256<<endl;
 	}
 	//for(;;);
-
+*/
 	return 0;
 }
 
